@@ -2,9 +2,10 @@ import { Metadata } from "next";
 import { GachaPage } from "@/components/GachaPage";
 
 export const generateMetadata = async ({ searchParams }: {
-  searchParams: { [key: string]: string | string[] | undefined }
+  searchParams: any
 }): Promise<Metadata> => {
-  const results = searchParams.results;
+  const params = await searchParams;
+  const results = params.results;
   const ogImageUrl = `https://noh88ekwx1.execute-api.ap-northeast-1.amazonaws.com/dev/ogp/gacha`;
 
   return {
@@ -24,10 +25,11 @@ export const generateMetadata = async ({ searchParams }: {
   };
 };
 
-export default function Home({
+export default async function Home({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined }
+  searchParams: any
 }) {
-  return <GachaPage searchParams={searchParams} />;
+  const params = await searchParams;
+  return <GachaPage searchParams={params} />;
 }

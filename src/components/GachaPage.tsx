@@ -25,22 +25,13 @@ export const GachaPage = ({ searchParams }: GachaPageProps) => {
   }, [searchParams]);
 
   const handleGachaResults = (results: GachaResult[] | null) => {
-    const params = new URLSearchParams();
-
-    Object.entries(searchParams).forEach(([key, value]) => {
-      if (key !== 'results' && value !== undefined) {
-        params.set(key, Array.isArray(value) ? value[0] : value);
-      }
-    });
-
     if (results === null) {
-      params.delete('results');
-    } else {
-      const resultsString = results.join('');
-      params.set('results', resultsString);
+      router.replace('/');
+      return;
     }
 
-    router.replace(`?${params.toString()}`);
+    const resultsString = results.join('');
+    router.replace(`?results=${resultsString}`);
   };
 
   return (
