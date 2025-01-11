@@ -6,7 +6,7 @@ export const generateMetadata = async ({ searchParams }: {
 }): Promise<Metadata> => {
   const params = await searchParams;
   const results = params.results;
-  const ogImageUrl = `https://noh88ekwx1.execute-api.ap-northeast-1.amazonaws.com/dev/ogp/gacha`;
+  const ogImageUrl = `https://d3dzv36ke8syqj.cloudfront.net/ogp/gacha`;
 
   return {
     title: '動的OGPテスト',
