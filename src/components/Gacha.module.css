@@ -1,0 +1,67 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.description {
+  margin-bottom: 30px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.description_list {
+  padding-left: 1em;
+}
+
+.input_group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.input_label {
+  display: block;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+.input {
+  width: 80px;
+  padding: 0 10px;
+}
+
+.input[aria-invalid="true"] {
+  background: lightpink;
+  border: 1px solid red;
+}
+
+.error_message {
+  color: red;
+  display: flex;
+  justify-content: center;
+}
+
+.button_group {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.result {
+  margin-top: 40px;
+}
+
+.result_count {
+  margin: 10px 0;
+}
+
+.result_list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
