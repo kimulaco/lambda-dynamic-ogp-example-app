@@ -7,7 +7,7 @@ import { useGacha, type GachaResult } from "@/hooks/useGacha";
 import styles from "./Gacha.module.css";
 
 interface GachaProps {
-  onGachaResults?: (results: GachaResult[]) => void;
+  onGachaResults?: (results: GachaResult[] | null) => void;
   initialResults?: GachaResult[] | null;
 }
 
@@ -53,6 +53,14 @@ export const Gacha = ({ onGachaResults, initialResults }: GachaProps) => {
     }
   };
 
+  const handleClearResults = () => {
+    setGachaResults(null);
+
+    if (onGachaResults) {
+      onGachaResults(null);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <form noValidate onSubmit={handleSubmit}>
@@ -87,11 +95,20 @@ export const Gacha = ({ onGachaResults, initialResults }: GachaProps) => {
         <div className={styles.button_group}>
           <button
             type="submit"
-            className={isDrawing ? "bg-red-500" : "bg-blue-500"}
+            className={styles.button}
             disabled={isDrawing || isInvalid}
           >
             {isDrawing ? `${drawCount}回ガチャ中...` : `${drawCount}回ガチャる！`}
           </button>
+          {!isDrawing && gachaResults && (
+            <button
+              type="button"
+              className={styles.button}
+              onClick={handleClearResults}
+            >
+              結果をクリア
+            </button>
+          )}
         </div>
       </form>
 

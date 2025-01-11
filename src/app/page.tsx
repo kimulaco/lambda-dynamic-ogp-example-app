@@ -1,41 +1,33 @@
-"use client";
+import { Metadata } from "next";
+import { GachaPage } from "@/components/GachaPage";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import styles from "./page.module.css";
-import { Gacha } from "@/components/Gacha";
-import type { GachaResult } from "@/hooks/useGacha";
+export const generateMetadata = async ({ searchParams }: {
+  searchParams: { [key: string]: string | string[] | undefined }
+}): Promise<Metadata> => {
+  const results = searchParams.results;
+  const ogImageUrl = `https://noh88ekwx1.execute-api.ap-northeast-1.amazonaws.com/dev/ogp/gacha`;
 
-export default function Home() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [initialResults, setInitialResults] = useState<GachaResult[] | null>(null);
-
-  useEffect(() => {
-    const results = searchParams.get('results');
-    if (results) {
-      // 文字列を配列に変換
-      const resultsArray = results.split('').map(Number) as GachaResult[];
-      setInitialResults(resultsArray);
-    }
-  }, [searchParams]);
-
-  const handleGachaResults = (results: GachaResult[]) => {
-    const params = new URLSearchParams(searchParams.toString());
-    const resultsString = results.join('');
-    params.set('results', resultsString);
-    router.replace(`?${params.toString()}`);
+  return {
+    title: '動的OGPテスト',
+    description: '動的OGPテストの説明文',
+    openGraph: {
+      title: '動的OGPテスト',
+      images: [{
+        url: `${ogImageUrl}${results ? `?results=${results.toString()}` : ''}`,
+        width: 1200,
+        height: 630,
+      }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+    },
   };
+};
 
-  return (
-    <div className={styles.page}>
-      <header className={styles.header}>
-        <h1 className={styles.title}>動的OGPテキスト</h1>
-      </header>
-
-      <main className={styles.main}>
-        <Gacha onGachaResults={handleGachaResults} initialResults={initialResults} />
-      </main>
-    </div>
-  );
+export default function Home({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined }
+}) {
+  return <GachaPage searchParams={searchParams} />;
 }

@@ -32,6 +32,10 @@
   padding: 0 10px;
 }
 
+.button {
+  margin: 0 10px;
+}
+
 .input[aria-invalid="true"] {
   background: lightpink;
   border: 1px solid red;
