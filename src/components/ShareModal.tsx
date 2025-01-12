@@ -24,6 +24,10 @@ export const ShareModal = ({
   }, [results]);
 
   const shareUrl = useMemo(() => {
+    if (typeof window === 'undefined') {
+      return '';
+    }
+
     const url = new URL(window.location.href);
     url.searchParams.set('results', results);
     return url.toString();
