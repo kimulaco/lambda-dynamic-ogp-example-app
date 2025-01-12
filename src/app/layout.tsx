@@ -13,8 +13,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "動的OGPテスト",
-  description: "動的OGPテスト",
+  title: '動的OGPテスト',
+  description: '動的OGPテストでガチャをしよう！',
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

@@ -9,8 +9,6 @@ export const generateMetadata = async ({ searchParams }: {
   const ogImageUrl = `https://d3dzv36ke8syqj.cloudfront.net/ogp/gacha`;
 
   return {
-    title: '動的OGPテスト',
-    description: '動的OGPテストの説明文',
     openGraph: {
       type: 'website',
       siteName: '動的OGPテスト',
@@ -24,10 +22,6 @@ export const generateMetadata = async ({ searchParams }: {
     },
     twitter: {
       card: 'summary_large_image',
-    },
-    robots: {
-      index: true,
-      follow: true,
     },
   };
 };
