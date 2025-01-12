@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useGacha, type GachaResult } from "@/hooks/useGacha";
 import styles from "./Gacha.module.css";
+import { useShareModal } from "@/components/ShareModal";
 
 interface GachaProps {
   onGachaResults?: (results: GachaResult[] | null) => void;
@@ -17,6 +18,7 @@ export const Gacha = ({ onGachaResults, initialResults }: GachaProps) => {
     initialGachaCount: initialResults?.length,
   });
   const [gachaResults, setGachaResults] = useState<GachaResult[] | null>(initialResults || null);
+  const { ShareModal, setIsOpen } = useShareModal();
 
   // URLパラメータから初期値を設定
   useEffect(() => {
@@ -59,6 +61,10 @@ export const Gacha = ({ onGachaResults, initialResults }: GachaProps) => {
     if (onGachaResults) {
       onGachaResults(null);
     }
+  };
+
+  const handleClickShare = () => {
+    setIsOpen(true);
   };
 
   return (
@@ -120,8 +126,15 @@ export const Gacha = ({ onGachaResults, initialResults }: GachaProps) => {
 
       {!isDrawing && gachaResults && (
         <div className={styles.result}>
-          <h2>ガチャ結果</h2>
+          <h2 id="gacha_result">ガチャ結果</h2>
           <p className={styles.result_count}>{gachaResults.length}回ガチャしました</p>
+          <button
+            type="button"
+            className={styles.share_button}
+            onClick={handleClickShare}
+          >
+            結果をシェアする
+          </button>
           <ul className={styles.result_list}>
             {gachaResults.map((result, index) => {
               if (Number(result) === 2) {
@@ -135,6 +148,10 @@ export const Gacha = ({ onGachaResults, initialResults }: GachaProps) => {
           </ul>
         </div>
       )}
+
+      <ShareModal
+        results={(gachaResults || []).join('')}
+      />
     </div>
   );
 }

@@ -36,6 +36,10 @@
   margin: 0 10px;
 }
 
+.share_button {
+  margin: 10px 0 30px;
+}
+
 .input[aria-invalid="true"] {
   background: lightpink;
   border: 1px solid red;
