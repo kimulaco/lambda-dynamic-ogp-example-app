@@ -10,10 +10,6 @@ export const generateMetadata = async ({ searchParams }: {
 
   return {
     openGraph: {
-      type: 'website',
-      siteName: '動的OGPテスト',
-      title: '動的OGPテスト',
-      description: '動的OGPテストでガチャをしよう！',
       images: [{
         url: `${ogImageUrl}${results ? `?results=${results.toString()}` : ''}`,
         width: 1200,
